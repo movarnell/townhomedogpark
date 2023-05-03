@@ -1,8 +1,7 @@
 import React from 'react';
 import TodaysSchedule from './TodaysSchedule';
 import Entry from './Entry';
-import Title from './Title';
-import Navigation from './Navigation';
+
 
 export default function MainPage({ users, createUser, deleteUser }) {
   console.log(" ---------------------------------------------")

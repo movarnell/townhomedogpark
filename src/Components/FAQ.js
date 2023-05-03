@@ -1,6 +1,6 @@
 import React from 'react'
 
-// FAQ page
+
 export default function FAQ() {
   return (
     <>

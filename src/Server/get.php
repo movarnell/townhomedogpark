@@ -1,7 +1,7 @@
 <?php
 // Database connection variables
-$servername = "89.117.139.52";
-$username = "dogpark";
+$servername = "localhost";
+$username = "u504367542_dogpark";
 $password = "jdgfdCiNx9uRZmW";
 $dbname = "u504367542_dogpark";
 
@@ -14,7 +14,7 @@ if (!$conn) {
 }
 
 // SQL query to retrieve all entries from the table
-$sql = "SELECT * FROM table_name";
+$sql = "SELECT * FROM dogparkusers";
 
 // Execute the query
 $result = mysqli_query($conn, $sql);
@@ -26,7 +26,8 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $data[] = $row;
     }
-    // Convert the array to JSON and output it
+    // Convert the array to JSON and return it
+    header('Content-Type: application/json');
     echo json_encode($data);
 } else {
     echo "0 results";

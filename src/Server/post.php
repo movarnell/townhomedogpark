@@ -1,7 +1,7 @@
 <?php
 // Database connection variables
-$servername = "89.117.139.52";
-$username = "dogpark";
+$servername = "localhost";
+$username = "u504367542_dogpark";
 $password = "jdgfdCiNx9uRZmW";
 $dbname = "u504367542_dogpark";
 
@@ -15,13 +15,13 @@ if ($conn->connect_error) {
 
 // Get the POST data
 $name = $_POST['name'];
-$dogname = $_POST['dogname'];
+$dogName = $_POST['dogname'];
 $date = $_POST['date'];
 $friendly = $_POST['friendly'];
 
 // Prepare and bind the SQL statement
-$stmt = $conn->prepare("INSERT INTO dogparkusers (name, dogname, date, friendly) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("sssi", $name, $dogname, $date, $friendly);
+$stmt = $conn->prepare("INSERT INTO dogparkusers (name, dogName, date, friendly) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("sssi", $name, $dogName, $date, $friendly);
 
 // Execute the statement
 if ($stmt->execute()) {

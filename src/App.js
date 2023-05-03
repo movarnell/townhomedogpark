@@ -11,7 +11,11 @@ import Title from './Components/Title';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const ApiEndpoint= "https://64494580b88a78a8f002df32.mockapi.io/15thplace/user";
+  //const ApiEndpoint= "https://64494580b88a78a8f002df32.mockapi.io/15thplace/user";
+
+const getPHP = './Server/get.php'
+const postPHP = './Server/post.php'
+const deletePHP = './Server/delete.php'
 
   useEffect(() => {
     getUsers()
@@ -19,7 +23,7 @@ function App() {
   }, [])
   
    const fetchUsers = async () => {
-    const res = await fetch(ApiEndpoint)
+    const res = await fetch(getPHP)
     const data = await res.json()
     return data
   }
@@ -35,7 +39,7 @@ function App() {
   }
 
   const createUser = async (user) => {
-    const res = await fetch(ApiEndpoint, {
+    const res = await fetch(postPHP, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -47,12 +51,17 @@ function App() {
     getUsers();
   }
 
+
+
+
   const deleteUser = async (id) => {
-    await fetch(`${ApiEndpoint}/${id}`, {
+    await fetch(`${deletePHP}/${id}`, {
       method: 'DELETE',
     })
     setUsers(users.filter((user) => user.id !== id))
   }
+
+
 
 // function that takes the users array and if there are users in the past it deletes them with a 1 second delay between requests to the api and does not run if there are no past users
   const deletePastUsers = (users) => {
@@ -67,6 +76,7 @@ function App() {
     });
   };
   
+
 
 
   
