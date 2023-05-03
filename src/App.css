@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+.title1 {
+  font-family: 'Lobster Two', cursive;
+  ;
+}
+
+.title2 {
+  font-family: 'Courier Prime', monospace;
+}
+
+.calendarFixed {
+  display: grid;
+  justify-content: center;
+
+}
+
+.centerContent {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.leftTilt {
+  transform: rotate(-30deg);
+}
+
+.footer {
+  font-size: small;
+}
+
+.linkDecor {
+  text-decoration: none;
+  color:black;
+  font-weight: bolder;
+  margin: 0px;
+  padding: 0px;
+}

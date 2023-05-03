@@ -1,24 +1,86 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { useEffect, useState } from 'react';
+import MainPage from './Components/MainPage';
+import Schedule from './Components/Schedule';
+import 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import FAQ from './Components/FAQ';
+import Navigation from './Components/Navigation';
+import Title from './Components/Title';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [users, setUsers] = useState([]);
+  const ApiEndpoint= "https://64494580b88a78a8f002df32.mockapi.io/15thplace/user";
+
+  useEffect(() => {
+    getUsers()
+    deletePastUsers(users)
+  }, [])
+  
+   const fetchUsers = async () => {
+    const res = await fetch(ApiEndpoint)
+    const data = await res.json()
+    return data
+  }
+
+  const getUsers = async () => {
+    const usersFromServer = await fetchUsers()
+    usersFromServer.map((user) => {
+      return user
+    })
+    setUsers(usersFromServer)
+    console.log(usersFromServer)
+  
+  }
+
+  const createUser = async (user) => {
+    const res = await fetch(ApiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    const data = await res.json()
+    setUsers([...users, data])
+    getUsers();
+  }
+
+  const deleteUser = async (id) => {
+    await fetch(`${ApiEndpoint}/${id}`, {
+      method: 'DELETE',
+    })
+    setUsers(users.filter((user) => user.id !== id))
+  }
+
+// function that takes the users array and if there are users in the past it deletes them with a 1 second delay between requests to the api and does not run if there are no past users
+  const deletePastUsers = (users) => {
+    users.forEach((user) => {
+      const userTime = new Date(user.time);
+      const now = new Date();
+      if (userTime < now) {
+        setTimeout(() => {
+          deleteUser(user.id);
+        }, 1000);
+      }
+    });
+  };
+  
+
+
+  
+console.log(users)
+  return(
+    <>
+    <div className='row'><Title />
+        <Navigation/></div>
+    <Routes>
+    <Route path="/" element={<MainPage users={users} createUser={createUser} deleteUser={deleteUser} />} />
+    <Route path='/faq' element={<FAQ />}/>
+    <Route path='/schedule' element={<Schedule users={users} deleteUser={deleteUser}/>} />
+    </Routes>
+    </>
   );
 }
 
