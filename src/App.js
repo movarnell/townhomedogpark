@@ -13,7 +13,7 @@ function App() {
   const [users, setUsers] = useState([]);
   //const ApiEndpoint= "https://64494580b88a78a8f002df32.mockapi.io/15thplace/user";
 
-const getPHP = './Server/get.php'
+// const getPHP = './Server/get.php'
 const postPHP = './Server/post.php'
 const deletePHP = './Server/delete.php'
 
@@ -22,21 +22,26 @@ const deletePHP = './Server/delete.php'
     deletePastUsers(users)
   }, [])
   
-   const fetchUsers = async () => {
-    const res = await fetch(getPHP)
-    const data = await res.json()
-    return data
+
+ 
+
+  async function fetchUsers() {
+    try {
+      const response = await fetch('./Server/get.php');
+      const data = await response.json();
+      // Do something with the data, such as displaying it on the page
+      console.log(data);
+    } catch (error) {
+      // Handle any errors that occur during the fetch request
+      console.error(error);
+    }
   }
 
   const getUsers = async () => {
     const usersFromServer = await fetchUsers()
-    usersFromServer.map((user) => {
-      return user
-    })
     setUsers(usersFromServer)
-    console.log(usersFromServer)
-  
   }
+
 
   const createUser = async (user) => {
     const res = await fetch(postPHP, {

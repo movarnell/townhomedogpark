@@ -1,12 +1,12 @@
 <?php
-// Database connection variables
 $servername = "localhost";
-$username = "u504367542_dogpark";
-$password = "jdgfdCiNx9uRZmW";
-$dbname = "u504367542_dogpark";
+$database = "u504367542_dog2";
+$username = "u504367542_dog2";
+$password = "Mov@72758";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+$conn = mysqli_connect($servername, $username, $password, $database);
 
 // Check connection
 if ($conn->connect_error) {
@@ -15,12 +15,12 @@ if ($conn->connect_error) {
 
 // Get the POST data
 $name = $_POST['name'];
-$dogName = $_POST['dogname'];
+$dogName = $_POST['dogName'];
 $date = $_POST['date'];
 $friendly = $_POST['friendly'];
 
 // Prepare and bind the SQL statement
-$stmt = $conn->prepare("INSERT INTO dogparkusers (name, dogName, date, friendly) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO dog (name, dogName, date, friendly) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("sssi", $name, $dogName, $date, $friendly);
 
 // Execute the statement
