@@ -45,10 +45,11 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 		sortedTodaysUsers.sort((a, b) => {
 			const aTime = new Date(a.time);
 			const bTime = new Date(b.time);
-			return bTime - aTime;
+			return aTime - bTime;
 		});
 		return sortedTodaysUsers;
 	}
+	
 	let sortedTodaysUsers = sortTodaysUsers(todaysUsers);
 	console.log(sortedTodaysUsers);
 	function countusersNxtHr(sortedTodaysUsers) {
@@ -89,7 +90,18 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 	}
 	let filteredUsers = filterOutPastUsers(sortedTodaysUsers);
 	console.log(filteredUsers);
-
+// parse just the filteredUsers.friendly to a boolean
+function parseFriendly(filteredUsers) {
+	const parsedFriendly = filteredUsers.map((user) => {
+		return {
+			...user,
+			friendly: user.friendly === "true",
+		};
+	});
+	return parsedFriendly;
+}
+filteredUsers = parseFriendly(filteredUsers);
+console.log(filteredUsers);
 
 
 

@@ -3,21 +3,40 @@ import Calendar from './Calendar';
 import { format } from 'date-fns';
 
 
-export default function Schedule({users, deleteUser}) {
+export default function Schedule({users, deleteUser, getUsers}) {
   
+React.useEffect(() => {
+    getUsers();
+}, []);
+
+
 // sort users array by date and time with the most recent at the top
-function sortUsers(users) {
-    const sortedUsers = [...users];
-    sortedUsers.sort((a, b) => {
-        const aDate = new Date(a.date);
-        const bDate = new Date(b.date);
-        const aTime = new Date(a.time);
-        const bTime = new Date(b.time);
-        return bDate - aDate || bTime - aTime;
-    });
-    return sortedUsers;
-}
- const sortedUsers = sortUsers(users);
+    function sortUsers(users) {
+        const sortedUsers = [...users];
+        sortedUsers.sort((a, b) => {
+            const aDate = new Date(a.date);
+            const bDate = new Date(b.date);
+            return aDate - bDate;
+        });
+        return sortedUsers;
+    }
+// filter out users that are in the past
+    function getFutureUsers(sortedUsers) {
+        const futureUsers = [];
+        const now = new Date();
+        sortedUsers.forEach((user) => {
+            const userDate = new Date(user.date);
+            if (userDate > now) {
+                futureUsers.push(user);
+            }
+        });
+        return futureUsers;
+    }
+
+
+
+ let sortedUsers = sortUsers(users);
+ sortedUsers = getFutureUsers(sortedUsers);
 
     function formatDate(date) {
         const dateObj = new Date(date);
@@ -38,13 +57,13 @@ function sortUsers(users) {
 
                 {sortedUsers.map((user) => (
                     
-                    <div className='card m-3 shadow border border-1 border-secondary rounded-3' key={user._id}>
+                    <div className='card m-3 shadow border border-1 border-secondary rounded-3' key={parseInt(user._id)}>
                         <div className='card-body'>
                         <button
 								type="button"
 								className="btn-close float-end"
 								aria-label="Close"
-								onClick={() => deleteUser(user.id)}
+								onClick={() => deleteUser(parseInt(user.id))}
 							></button>
                             <h5 className='card-title'>{user.name}</h5>
                             <h5 className='card-title'>Bringing: {user.dogName}</h5>

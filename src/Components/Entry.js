@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap'
 
 
 
-export default function Entry({ users, createUser}) {
+export default function Entry({ createUser, getUsers}) {
     const [name, setName] = useState('')
     const [dogName, setDogName] = useState('')
     const [date, setDate] = useState('')
@@ -38,13 +38,16 @@ onsubmit = (e) => {
         friendly: friendly
     }
     console.log(newUser)    
+    
     createUser(newUser)
-    // clear form after submit
-    document.getElementById('dogName').value = ''
-    document.getElementById('datetime').value = ''
-    document.getElementById('name').value = ''
-    document.getElementById('formBasicCheckbox').checked = false
+    clearForm()
+    getUsers()
+    setName('')
+    setDogName('')
+    setFriendly(true)
+}
 
+function clearForm() {
     setName('')
     setDogName('')
     setDate('')
