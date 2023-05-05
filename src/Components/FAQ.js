@@ -16,8 +16,9 @@ export default function FAQ() {
             <br/>
             <li className='fw-bolder'>Q. Why can't I make an account? I want to save stuff!</li>
             <li>A. I felt part of the charm of doing things this way is that you can stay as annonymous as you want. You don't have to put your real name, although it works best if that is the only part not real. It's not nice to call a dog by the wrong name, and in canine circles it could be considered insulting.</li>
+            <br/>
             <li className='fw-bolder'>Q. How can I get in touch with you?</li>
-            <li>The preferred method of contact for me is my email, which is michaelvarnell@icloud.com</li>
+            <li>A.The preferred method of contact for me is my email, which is michaelvarnell@icloud.com</li>
             </ul><br/>
             I hope this tool enriches your dogs life, and yours as well. It will be enough for me to see smiles on your faces while the dogs frolick in our little oasis in the cul de sac!
             </h5></div>

@@ -1,6 +1,7 @@
 {
   "name": "fastdogpark",
   "version": "0.1.0",
+  "homepage": "/",
   "proxy": "http://testtemp.michaelvarnell.com/",
   "private": true,
   "dependencies": {

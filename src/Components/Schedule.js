@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Calendar from './Calendar';
 import { format } from 'date-fns';
 
 
 export default function Schedule({users, deleteUser, getUsers}) {
   
-React.useEffect(() => {
+useEffect(() => {
     getUsers();
 }, []);
 
@@ -53,7 +53,7 @@ React.useEffect(() => {
                 <Calendar users={users} />
                 </div>
             </div>
-            <div className='col'>
+            <div className='col title2'>
 
                 {sortedUsers.map((user) => (
                     

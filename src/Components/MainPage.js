@@ -3,11 +3,14 @@ import TodaysSchedule from './TodaysSchedule';
 import Entry from './Entry';
 
 
-export default function MainPage({ users, createUser, deleteUser, getUsers }) {
+export default function MainPage({ users, createUser, deleteUser, getUsers, setUsers }) {
   console.log(" ---------------------------------------------")
   console.log("file: MainPage.js:5 ~ MainPage ~ users:", users)
   console.log(" ---------------------------------------------")
   
+  
+ 
+
 
     return (
 <>
@@ -15,7 +18,7 @@ export default function MainPage({ users, createUser, deleteUser, getUsers }) {
     
 <div className='row'>
     <div className='col'>
-        <Entry createUser={createUser} users={users} getUsers={getUsers} />
+        <Entry users={users} createUser={createUser}  getUsers={getUsers} setUsers={setUsers} />
     </div>
     <div className='col'>
         

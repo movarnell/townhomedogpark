@@ -63,9 +63,6 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 			if (userTime < nxtHr) {
 				usersNxtHr.push(user);
 			}
-			if (userTime < now) {
-				deleteUser(user.id);
-			}
 		});
 		return usersNxtHr;
 	}
@@ -90,18 +87,8 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 	}
 	let filteredUsers = filterOutPastUsers(sortedTodaysUsers);
 	console.log(filteredUsers);
-// parse just the filteredUsers.friendly to a boolean
-function parseFriendly(filteredUsers) {
-	const parsedFriendly = filteredUsers.map((user) => {
-		return {
-			...user,
-			friendly: user.friendly === "true",
-		};
-	});
-	return parsedFriendly;
-}
-filteredUsers = parseFriendly(filteredUsers);
-console.log(filteredUsers);
+
+	
 
 
 
