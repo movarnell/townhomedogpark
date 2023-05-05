@@ -1,4 +1,4 @@
-# Dog Park Scheduler
+# 15th Place Townhome Dog Park Scheduler
 
 This project is a scheduler for townhome communities' dog parks. It is intended to be a live site that the community can use to schedule their visits to the park.
 
