@@ -22,11 +22,7 @@ export default function Entry({ users, createUser, setUsers}) {
         setDate(e.target.value)
     }
     const friendlyOnChange = (e) => {
-        if (e.target.checked === true){
-            setFriendly(1)
-        }else{
-            setFriendly(0)
-        }
+        setFriendly(e.target.checked)
          console.log(friendly)
      }
      const puppyOnChange = (e) => {
@@ -39,23 +35,10 @@ export default function Entry({ users, createUser, setUsers}) {
 
 onsubmit = (e) => {
     e.preventDefault()
-    
-    // if statment to check if the name, dogname and date are filled out before continueing
     if (!name || !dogName || !date) {
         alert('You must submitt a name, dog name and date')
         return
     }else{
-        if(friendly === true){
-            setFriendly(0)
-        }else{
-            setFriendly(1)
-        }
-        if(puppy === true){
-            setPuppy(0)
-        }else{
-            setPuppy(1)
-        }
-    }
     const newUser =
     {   name: name,
         dogName: dogName,
@@ -68,6 +51,7 @@ onsubmit = (e) => {
     createUser(newUser)
     setUsers([...users, newUser])
     clearForm()
+}
 }
 
 function clearForm() {
