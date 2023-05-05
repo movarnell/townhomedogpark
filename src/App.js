@@ -46,7 +46,7 @@ useEffect(() => {
     axios.post("https://michaelvarnell.com/dogparkserver/add_dog.php", data)
     .then(response => {
       console.log(response.data);
-    }).then(parseFriendly()).catch(error => {
+    }).then(parseFriendly()).then(parsePuppy()).catch(error => {
       console.log(error);
     });
 }
@@ -66,22 +66,26 @@ function deleteUser(userId) {
 const parseFriendly = () => {
   const newUsers = users.map((user) => {
     if (user.friendly === "1") {
-      user.friendly = true
-    } else {
       user.friendly = false
+    } else {
+      user.friendly = true
     }
     return user
   })
   setUsers(newUsers)
 }
 
-
-  
-
-
-  
-
-
+const parsePuppy = () => {
+  const newUsers = users.map((user) => {
+    if (user.puppy === "1") {
+      user.puppy = true
+    } else {
+      user.puppy = false
+    }
+    return user
+  })
+  setUsers(newUsers)
+}
 
   
 console.log(users)

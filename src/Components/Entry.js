@@ -8,8 +8,8 @@ export default function Entry({ users, createUser, setUsers}) {
     const [name, setName] = useState('')
     const [dogName, setDogName] = useState('')
     const [date, setDate] = useState('')
-    const [friendly, setFriendly] = useState(true)
-    
+    const [friendly, setFriendly] = useState(false)
+    const [puppy, setPuppy] = useState(false)
 
 
     const nameOnChange = (e) => {
@@ -22,20 +22,46 @@ export default function Entry({ users, createUser, setUsers}) {
         setDate(e.target.value)
     }
     const friendlyOnChange = (e) => {
-       setFriendly(e.target.checked)
+        if (e.target.checked === true){
+            setFriendly(1)
+        }else{
+            setFriendly(0)
+        }
          console.log(friendly)
      }
+     const puppyOnChange = (e) => {
+        setPuppy(e.target.checked)
+            console.log(puppy)
+        }
 
     
 
 
 onsubmit = (e) => {
     e.preventDefault()
+    
+    // if statment to check if the name, dogname and date are filled out before continueing
+    if (!name || !dogName || !date) {
+        alert('You must submitt a name, dog name and date')
+        return
+    }else{
+        if(friendly === true){
+            setFriendly(0)
+        }else{
+            setFriendly(1)
+        }
+        if(puppy === true){
+            setPuppy(0)
+        }else{
+            setPuppy(1)
+        }
+    }
     const newUser =
     {   name: name,
         dogName: dogName,
         date: date,
-        friendly: friendly
+        friendly: friendly,
+        puppy: puppy
     }
     console.log(newUser)    
     
@@ -47,7 +73,9 @@ onsubmit = (e) => {
 function clearForm() {
     document.getElementById('name').value = '';
     document.getElementById('dogName').value = '';
+    document.getElementById('datetime').value = new Date().toISOString().slice(0, 16);
     document.getElementById('formBasicCheckbox').checked = false;
+    document.getElementById('formBasicCheckbox2').checked = false;
 }
 
 
@@ -73,6 +101,11 @@ function clearForm() {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Not dog/human friendly" onChange={friendlyOnChange} />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox2">   
+            <Form.Check type="checkbox" label="My dog is a puppy still."onChange={puppyOnChange} />
+            </Form.Group>
+            
+
             <Button variant="primary shadow mb-3 ms-3" type="submit">
             <svg stroke="currentColor" 
         className='leftTilt mb-1 me-1'

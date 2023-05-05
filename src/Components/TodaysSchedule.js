@@ -1,6 +1,8 @@
 import React from "react";
 import { format, addHours } from "date-fns";
 
+// adding in a second info alert that shows if the dog is a puppy
+
 export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 	console.log(users);
 
@@ -52,6 +54,9 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 	
 	let sortedTodaysUsers = sortTodaysUsers(todaysUsers);
 	console.log(sortedTodaysUsers);
+	
+
+
 	function countusersNxtHr(sortedTodaysUsers) {
 		const now = new Date();
 		const nxtHr = addHours(now, 1);
@@ -62,6 +67,9 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 			const userTime = new Date(user.date);
 			if (userTime < nxtHr) {
 				usersNxtHr.push(user);
+			}
+			if (userTime < now) {
+				deleteUser(user.id);
 			}
 		});
 		return usersNxtHr;
@@ -85,12 +93,12 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 		});
 		return filteredUsers;
 	}
-	let filteredUsers = filterOutPastUsers(sortedTodaysUsers);
+	let filteredUsers = sortTodaysUsers(filterOutPastUsers(sortedTodaysUsers));
 	console.log(filteredUsers);
 
 	
 
-
+// adding in a second info alert that shows if the dog is a puppy
 
 	return (
         <>
@@ -110,16 +118,23 @@ export default function TodaysSchedule({ users, deleteUser, getUsers }) {
 								onClick={() => deleteUser(user.id)}
 							></button>
 							<h5 className="card-title fw-bold">{user.name} is bringing</h5>
-							<h5 className="mb-2 fw-bold">{user.dogName}</h5>
+							<h5 className="mb-2fw-bold">{user.dogName}</h5>
 							<h6 className="card-text">Today at {formatTime(user.date)}</h6>
 							<p className="card-text">
 	This Dog is{" "}
-	{!user.friendly && <span className="text-danger fw-bolder">NOT</span>} friendly
+	{user.friendly ? <span className="text-danger fw-bolder">{user.friendly}NOT</span>:('')} friendly
 </p>
 
 							{usersNxtHr.some((usersNxtHr) => usersNxtHr.id === user.id) ? (
-								<p className="alert alert-info m-0 p-0">
+								<p className="alert alert-info border border-1 border-secondary m-1 p-1">
 								<svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="1.75em" width="1.75em" xmlns="http://www.w3.org/2000/svg"><circle fill="#2196F3" cx="24" cy="24" r="21"></circle><rect x="22" y="22" fill="#fff" width="4" height="11"></rect><circle fill="#fff" cx="24" cy="16.5" r="2.5"></circle></svg>	This dog arrives within the next hour.
+								</p>
+							) : (
+								""
+							)}
+							{user.puppy ? (
+								<p className="alert alert-success border border-1 border-secondary m-1 p-1">
+								<svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="1.75em" width="1.75em" xmlns="http://www.w3.org/2000/svg"><circle fill="#2196F3" cx="24" cy="24" r="21"></circle><rect x="22" y="22" fill="#fff" width="4" height="11"></rect><circle fill="#fff" cx="24" cy="16.5" r="2.5"></circle></svg>	{user.puppy}This dog is a puppy. Please be gentle.
 								</p>
 							) : (
 								""

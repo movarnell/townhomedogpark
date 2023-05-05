@@ -17,10 +17,10 @@ export default function MainPage({ users, createUser, deleteUser, getUsers, setU
 <div className="container-fluid">
     
 <div className='row'>
-    <div className='col'>
+    <div className='col-md-6 col-sm-12'>
         <Entry users={users} createUser={createUser}  getUsers={getUsers} setUsers={setUsers} />
     </div>
-    <div className='col'>
+    <div className='col-md-6 col-sm-12'>
         
 <TodaysSchedule users={users} deleteUser={deleteUser} />
 </div>
