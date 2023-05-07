@@ -35,7 +35,7 @@ function sortUsers(users) {
 	
 	todaySchedule.forEach((user) => {
 		const userTime = new Date(user.date);
-		if (userTime < nxtHr) {
+		if (userTime < nxtHr && userTime > new Date()) {
 			nextHrUsers.push(user);
 		}
 	});
