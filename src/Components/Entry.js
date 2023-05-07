@@ -1,3 +1,4 @@
+import { set } from 'date-fns'
 import React, {useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
@@ -45,11 +46,10 @@ onsubmit = (e) => {
         date: date,
         friendly: friendly,
         puppy: puppy
-    }
-    console.log(newUser)    
-    
+    }    
     createUser(newUser)
     setUsers([...users, newUser])
+    console.log("file: Entry.js:53   Entry   newUser:", newUser)
     clearForm()
 }
 }
@@ -78,7 +78,7 @@ function clearForm() {
                 <Form.Label>Dog Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter Dog's Name" onChange={dogNameOnChange} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="date">
+            <Form.Group className="mb-3" controlId="datetime">
                 <Form.Label>Date</Form.Label>
                 <input className='form-control' type="datetime-local" id="datetime" name="datetime" onChange={dateOnChange}/>
             </Form.Group>

@@ -1,125 +1,61 @@
 import React from "react";
 import { format, addHours } from "date-fns";
 
-// adding in a second info alert that shows if the dog is a puppy
-
-export default function TodaysSchedule({ users, deleteUser, getUsers }) {
+export default function TodaysSchedule({ users, deleteUser }) {
 	console.log(users);
-if(users.length === 0) {
-	return (
-		<>
-			<div className="container-fluid">
-				<div className="row m-3 centerContent">
-					<div className="col text-center">
-						<div className="calendarFixed">
-							<h1 className="title2">No Appointments Today</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
-}
-	users.forEach((user) => {
-		const userTime = new Date(user.time);
-		const now = new Date();
-		if (userTime < now) {
-			deleteUser(user._id);
-			getUsers();
-		}
-	});
 
-	function sortUsers(users) {
-		const sortedUsers = [...users];
-		sortedUsers.sort((a, b) => {
-			const aDate = new Date(a.date);
-			const bDate = new Date(b.date);
-			return aDate - bDate;
-		});
-		return sortedUsers;
-	}
 
-	let sortedUsers = sortUsers(users);
-
-	function getTodaysUsers(sortedUsers) {
-		const todaysUsers = [];
+	function todaysUsers(users)
+	{
 		const today = new Date();
-		sortedUsers.forEach((user) => {
-			const userDate = new Date(user.date);
-			if (userDate.getDate() === today.getDate()) {
+		const todaysUsers = [];
+		users.forEach((user) => {
+			const userTime = new Date(user.date);
+			if (userTime.getDate() === today.getDate()) {
 				todaysUsers.push(user);
 			}
 		});
 		return todaysUsers;
 	}
+	
 
-	let todaysUsers = getTodaysUsers(sortedUsers);
-	console.log(todaysUsers);
-
-	function sortTodaysUsers(todaysUsers) {
-		const sortedTodaysUsers = [...todaysUsers];
-		sortedTodaysUsers.sort((a, b) => {
-			const aTime = new Date(a.time);
-			const bTime = new Date(b.time);
+function sortUsers(users) {
+		const sortedUsers = users.sort((a, b) => {
+			const aTime = new Date(a.date);
+			const bTime = new Date(b.date);
 			return aTime - bTime;
 		});
-		return sortedTodaysUsers;
+		return sortedUsers;
 	}
-	
-	let sortedTodaysUsers = sortTodaysUsers(todaysUsers);
-	console.log(sortedTodaysUsers);
-	
 
-
-	function countusersNxtHr(sortedTodaysUsers) {
-		const now = new Date();
-		const nxtHr = addHours(now, 1);
-		console.log(now);
-		console.log(nxtHr);
-		const usersNxtHr = [];
-		sortedTodaysUsers.forEach((user) => {
-			const userTime = new Date(user.date);
-			if (userTime < nxtHr) {
-				usersNxtHr.push(user);
-			}
-			if (userTime < now) {
-				deleteUser(user.id);
-			}
-		});
-		return usersNxtHr;
-	}
-	let usersNxtHr = countusersNxtHr(sortedTodaysUsers);
-	let usersNxtHrCt = countusersNxtHr(sortedTodaysUsers).length;
-	console.log(usersNxtHrCt);
-	console.log(usersNxtHr);
+	const todaySchedule = todaysUsers(users);
+	const nextHrUsers = [];
+	const nxtHr = addHours(new Date(), 1);
+	todaySchedule.forEach((user) => {
+		const userTime = new Date(user.date);
+		if (userTime < nxtHr) {
+			nextHrUsers.push(user);
+		}
+	});
+	const usersNxtHrCt = nextHrUsers.length;
+	const filteredUsers = sortUsers(todaySchedule);
+	const usersNxtHr = sortUsers(nextHrUsers);
 
 	function formatTime(time) {
 		const date = new Date(time);
 		return format(date, "h:mm a");
 	}
 
-	function filterOutPastUsers(users) {
-		const now = new Date();
-		const filteredUsers = users.filter((user) => {
-			const userDate = new Date(user.date);
-			const userTime = new Date(user.time);
-			return userDate > now || (userDate === now && userTime > now);
-		});
-		return filteredUsers;
-	}
-	let filteredUsers = sortTodaysUsers(filterOutPastUsers(sortedTodaysUsers));
-	console.log(filteredUsers);
 
-	function parseBoolean(bool) {
-		if (bool === "1") {
+	function parseBoolean(friendly) {
+		if (friendly === "1") {
 			return true;
 		} else {
 			return false;
 		}
-	}
+	}	
 
 
-// adding in a second info alert that shows if the dog is a puppy
 
 	return (
         <>
@@ -141,10 +77,10 @@ if(users.length === 0) {
 							<h5 className="card-title fw-bold">{user.name} is bringing</h5>
 							<h5 className="mb-2fw-bold">{user.dogName}</h5>
 							<h6 className="card-text">Today at {formatTime(user.date)}</h6>
-							<p className="card-text">
-	This Dog is{" "}
-	{parseBoolean(user.friendly) ? <span className="text-danger fw-bolder">{parseBoolean(user.friendly)}NOT</span>:('')} friendly
-</p>
+							
+	{parseBoolean(user.friendly) ? <h6 className="alert alert-danger fw-bolder border border-2 border-secondary m-1 p-1"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" className="mb-2 me-1" height="1.75em" width="1.75em" xmlns="http://www.w3.org/2000/svg"><path d="M193 796c0 17.7 14.3 32 32 32h574c17.7 0 32-14.3 32-32V563c0-176.2-142.8-319-319-319S193 386.8 193 563v233zm72-233c0-136.4 110.6-247 247-247s247 110.6 247 247v193H404V585c0-5.5-4.5-10-10-10h-44c-5.5 0-10 4.5-10 10v171h-75V563zm-48.1-252.5l39.6-39.6c3.1-3.1 3.1-8.2 0-11.3l-67.9-67.9a8.03 8.03 0 0 0-11.3 0l-39.6 39.6a8.03 8.03 0 0 0 0 11.3l67.9 67.9c3.1 3.1 8.1 3.1 11.3 0zm669.6-79.2l-39.6-39.6a8.03 8.03 0 0 0-11.3 0l-67.9 67.9a8.03 8.03 0 0 0 0 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0l67.9-67.9c3.1-3.2 3.1-8.2 0-11.3zM832 892H192c-17.7 0-32 14.3-32 32v24c0 4.4 3.6 8 8 8h688c4.4 0 8-3.6 8-8v-24c0-17.7-14.3-32-32-32zM484 180h56c4.4 0 8-3.6 8-8V76c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v96c0 4.4 3.6 8 8 8z"></path></svg>
+     This dog is not friendly with either other dogs or people. 
+								</h6>:('')}
 
 							{usersNxtHr.some((usersNxtHr) => usersNxtHr.id === user.id) ? (
 								<p className="alert alert-info border border-2 border-secondary m-1 p-1">
