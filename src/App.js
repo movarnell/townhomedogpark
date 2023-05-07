@@ -10,7 +10,6 @@ import FAQ from "./Components/FAQ";
 import Navigation from "./Components/Navigation";
 import Title from "./Components/Title";
 import axios from "axios";
-import NotFoundPage from "./Components/NotFoundPage";
 
 function App() {
 	// Setting initial state for users array
@@ -111,7 +110,6 @@ function App() {
 						/>
 					}
 				/>
-				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</>
 	);
