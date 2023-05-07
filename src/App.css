@@ -1,77 +1,52 @@
+/* General styles */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	text-align: center;
 }
 
 .title1 {
-  font-family: 'Lobster Two', cursive;
-  ;
+	font-family: "Lobster Two", cursive;
 }
 
 .title2 {
-  font-family: 'Courier Prime', monospace;
+	font-family: "Courier Prime", monospace;
 }
 
 .calendarFixed {
-  display: grid;
-  justify-content: center;
-
+	display: grid;
+	justify-content: center;
 }
-
-
 
 .centerContent {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
-.leftTilt {
-  transform: rotate(-30deg);
+	display: flex;
+	align-content: center;
+	justify-content: center;
 }
 
 .footer {
-  font-size: small;
+	font-size: small;
 }
 
 .linkDecor {
-  text-decoration: none;
-  color:black;
-  font-weight: bolder;
-  margin: 0px;
-  padding: 0px;
+	text-decoration: none;
+	color: black;
+	font-weight: bolder;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Header styles */
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+/* Additional styles */
+.leftTilt {
+	transform: rotate(-30deg);
 }

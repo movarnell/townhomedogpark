@@ -4,7 +4,7 @@ import { format, addHours } from "date-fns";
 export default function TodaysSchedule({ users, deleteUser }) {
 	console.log(users);
 
-
+// Function that filters out users that are not for today
 	function todaysUsers(users)
 	{
 		const today = new Date();
@@ -18,7 +18,7 @@ export default function TodaysSchedule({ users, deleteUser }) {
 		return todaysUsers;
 	}
 	
-
+// Function that sorts users by date and time with the most recent at the top
 function sortUsers(users) {
 		const sortedUsers = users.sort((a, b) => {
 			const aTime = new Date(a.date);
@@ -28,25 +28,29 @@ function sortUsers(users) {
 		return sortedUsers;
 	}
 
+	// declare variables for various functions in the return statement
 	const todaySchedule = todaysUsers(users);
 	const nextHrUsers = [];
 	const nxtHr = addHours(new Date(), 1);
+	
 	todaySchedule.forEach((user) => {
 		const userTime = new Date(user.date);
 		if (userTime < nxtHr) {
 			nextHrUsers.push(user);
 		}
 	});
+
 	const usersNxtHrCt = nextHrUsers.length;
 	const filteredUsers = sortUsers(todaySchedule);
 	const usersNxtHr = sortUsers(nextHrUsers);
 
+	// Function that formats the time the way we want it to display
 	function formatTime(time) {
 		const date = new Date(time);
 		return format(date, "h:mm a");
 	}
 
-
+// Function to parse te boolean value so that it is readable since database does 1 or 0
 	function parseBoolean(friendly) {
 		if (friendly === "1") {
 			return true;
@@ -56,7 +60,7 @@ function sortUsers(users) {
 	}	
 
 
-
+// return element for the today schedule with alerts where appropriate and sorted with next up at the top, with alerts specific to dogs coming in the next hour
 	return (
         <>
 		<div className="row ms-2 me-2">
