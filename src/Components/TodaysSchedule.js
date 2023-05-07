@@ -32,28 +32,17 @@ function sortUsers(users) {
 	const todaySchedule = todaysUsers(users);
 	const nextHrUsers = [];
 	const nxtHr = addHours(new Date(), 1);
-	const now = new Date();
+	
 	todaySchedule.forEach((user) => {
 		const userTime = new Date(user.date);
-		if ( (now < userTime) && (userTime < nxtHr)) {
+		if (userTime < nxtHr && userTime > new Date()) {
 			nextHrUsers.push(user);
 		}
 	});
 
 	const usersNxtHrCt = nextHrUsers.length;
-	console.log("file: TodaysSchedule.js:44   TodaysSchedule   usersNxtHrCt:", usersNxtHrCt)
-	console.log(nextHrUsers);
 	const filteredUsers = sortUsers(todaySchedule);
-
 	const usersNxtHr = sortUsers(nextHrUsers);
-
-	const RemTdyUsers = filteredUsers.filter((user) => {
-		const userTime = new Date(user.date);
-		if (userTime > new Date()) {
-			return user;
-		}
-	});
-
 
 	// Function that formats the time the way we want it to display
 	function formatTime(time) {
@@ -83,7 +72,7 @@ function sortUsers(users) {
 						No dogs scheduled for today yet
 						</div>) : ("")}
 			</div>
-			{RemTdyUsers.map((user) => (
+			{filteredUsers.map((user) => (
 				<div className="col-sm-12 title2">
 					<div className="card shadow mt-2 rounded-3" key={user.id}>
 						<div className="card-body">
