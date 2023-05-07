@@ -60,7 +60,7 @@ export default function Schedule({users, deleteUser}) {
                 </div>
             </div>
             <div className='col title2'>
-
+                <h2 className='text-center title2 fw-bolder'>Upcoming Schedule</h2>
                 {sortedUsers.map((user) => (
                     
                     <div className='card m-3 shadow border border-1 border-secondary rounded-3' key={parseInt(user._id)}>
