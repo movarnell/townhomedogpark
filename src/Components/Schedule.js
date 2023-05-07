@@ -3,7 +3,7 @@ import Calendar from './Calendar';
 import { format } from 'date-fns';
 
 
-export default function Schedule({users, deleteUser, getUsers}) {
+export default function Schedule({users, deleteUser}) {
   
 
 
@@ -69,7 +69,7 @@ export default function Schedule({users, deleteUser, getUsers}) {
 								type="button"
 								className="btn-close float-end"
 								aria-label="Close"
-								onClick={() => deleteUser(parseInt(user.id))}
+								onClick={() => deleteUser(user.id)}
 							></button>
                             <h3 className='card-title fw-bold'>{user.name}</h3>
                             <h5 className='card-title'>Bringing:<span className='fw-bold'> {user.dogName}</span></h5>

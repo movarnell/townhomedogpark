@@ -67,6 +67,10 @@ function sortUsers(users) {
 			<div className="currentUsers">
                 <h2 className="title2 text-center">Today's Dogs</h2>
 				<h5 className="title2 text-center">Dogs in Next Hour: {usersNxtHrCt}</h5>
+				{todaysUsers(users).length === 0 ? (
+					<div className="alert alert-secondary title2 shadow border border-1 border-secondary rounded-3 m-1 p-1 text-center">
+						No dogs scheduled for today yet
+						</div>) : ("")}
 			</div>
 			{filteredUsers.map((user) => (
 				<div className="col-sm-12 title2">
