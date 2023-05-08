@@ -1,5 +1,5 @@
 import React from "react";
-import { format, addHours, subHours } from "date-fns";
+import { format, addHours} from "date-fns";
 
 export default function TodaysSchedule({ users, deleteUser }) {
 	console.log(users);

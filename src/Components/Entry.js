@@ -7,8 +7,8 @@ export default function Entry({ users, createUser, setUsers }) {
 	const [name, setName] = useState("");
 	const [dogName, setDogName] = useState("");
 	const [date, setDate] = useState("");
-	const [friendly, setFriendly] = useState(false);
-	const [puppy, setPuppy] = useState(false);
+	const [friendly, setFriendly] = useState(0);
+	const [puppy, setPuppy] = useState(0);
 
 	// Define onChange event for each input field to update its corresponding state
 	const nameOnChange = (e) => {
@@ -21,12 +21,18 @@ export default function Entry({ users, createUser, setUsers }) {
 		setDate(e.target.value);
 	};
 	const friendlyOnChange = (e) => {
-		setFriendly(e.target.checked);
-		console.log(friendly);
+		if(e.target.checked){
+			setFriendly(1);
+		} else {
+			setFriendly(0);
+		} console.log(friendly);
 	};
 	const puppyOnChange = (e) => {
-		setPuppy(e.target.checked);
-		console.log(puppy);
+		if(e.target.checked){
+			setPuppy(1);
+		} else {
+			setPuppy(0);
+		}
 	};
 
 	// Define onSubmit event for the form to create a new user
