@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-export default function Entry({ users, createUser, setUsers }) {
+export default function Entry({ users, createUser, setUsers, getUsers }) {
 	// Define state for all input fields
 
 	const [name, setName] = useState("");
@@ -60,9 +60,7 @@ export default function Entry({ users, createUser, setUsers }) {
 	function clearForm() {
 		document.getElementById("name").value = "";
 		document.getElementById("dogName").value = "";
-		document.getElementById("datetime").value = new Date()
-			.toISOString()
-			.slice(0, 16);
+		document.getElementById("datetime").value = new Date();
 		document.getElementById("formBasicCheckbox").checked = false;
 		document.getElementById("formBasicCheckbox2").checked = false;
 	}

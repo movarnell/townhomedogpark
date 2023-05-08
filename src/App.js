@@ -96,6 +96,7 @@ function App() {
 							createUser={createUser}
 							deleteUser={deleteUser}
 							setUsers={setUsers}
+							getUsers={getUsers}
 						/>
 					}
 				/>
