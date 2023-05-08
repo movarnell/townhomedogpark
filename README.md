@@ -19,12 +19,7 @@ The site is www.15thplacedogpark.com
 
 ## How to Use
 
-To use the scheduler, simply navigate to the website and select the date and time you would like to visit the dog park. You can also view existing reservations and cancel them if needed. Site will launch soon, right now I am using https://temptest.michaelvarnell.com for testing, you can view where it is at there. 
+To use the scheduler, simply navigate to the website and select the date and time you would like to visit the dog park. You can also view existing reservations and cancel them if needed. Site will launch soon, right now I am using https://temptest.michaelvarnell.com is my site for testing, you can view where it is at there, or the live version at the link above. 
 
-## How to Contribute
 
-If you would like to contribute to the project, please submit a pull request with your proposed changes. They will be reviewed and merged if they fit with the project's goals.
 
-## License
-
-This project is licensed under the MIT license. See the [LICENSE.md](http://license.md/) file for more information.
