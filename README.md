@@ -19,7 +19,8 @@ The site is www.15thplacedogpark.com
 
 ## How to Use
 
-To use the scheduler, simply navigate to the website and select the date and time you would like to visit the dog park. You can also view existing reservations and cancel them if needed. Site will launch soon, right now I am using https://temptest.michaelvarnell.com is my site for testing, you can view where it is at there, or the live version at the link above. 
+To use the scheduler, simply navigate to the website and select the date and time you would like to visit the dog park. You can also view existing reservations and cancel them if needed. 
 
+Gaining adoption in my neighborhood has been difficult without a email reminder, or social plugins. 
 
 
