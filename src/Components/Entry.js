@@ -37,6 +37,10 @@ export default function Entry({ users, createUser, setUsers }) {
 
 	// Define onSubmit event for the form to create a new user
 	onsubmit = (e) => {
+    /* (nathanstilwell comment) */
+    // It seems like you are creating component state here only to temporarily
+    // store the values of the form fields. If that's the case, you could
+    // probably just submit the value of the form fields directly
 		e.preventDefault();
 		if (!name || !dogName || !date) {
 			alert("You must submitt a name, dog name and date");
@@ -58,6 +62,11 @@ export default function Entry({ users, createUser, setUsers }) {
 
 	// Function to clear the form
 	function clearForm() {
+    /* (nathanstilwell comment) */
+    // This seems tedious. Managing form state is always a pain, but there are
+    // good options out there for managing form state. Formik and React Final Form
+    // were the two options I considered the last time I went shopping for a
+    // React based managed form.
 		document.getElementById("name").value = "";
 		document.getElementById("dogName").value = "";
 		document.getElementById("datetime").value = new Date()
